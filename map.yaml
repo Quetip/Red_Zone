@@ -1,0 +1,810 @@
+Rules:
+Player:
+ConquestVictoryConditions:
+Objective: Destroy Nukes
+MissionObjectives:
+EarlyGameOver: true
+GameOverDelay: 1200
+-EnemyWatcher:
+-BaseAttackNotifier:
+Shroud:
+FogLocked: True
+FogEnabled: True
+ExploredMapLocked: True
+ExploredMapEnabled: False
+PlayerResources:
+DefaultCashLocked: True
+DefaultCash: 0
+World:
+-StartGameNotification:
+FlashPaletteEffect@LIGHTNINGSTRIKE:
+Type: LightningStrike
+-CrateSpawner:
+GlobalLightingPaletteEffect:
+Red: 0.9
+Green: 0.9
+Blue: 1.1
+Ambient: 0.75
+-SpawnMPUnits:
+-MPStartLocations:
+MissionData:
+Briefing: INCOMMING TRANSMISSION: \n\nThe Allies Have Seiged One of Our Vital Nuclear Testing Facilities And Are Planning to Use It Against Us. \n\nFirst Objective: Free Our Volkov Who Is Being Detained and Interrogated In An Allied Prison. \n\n Second Objective: Destroy Allied Communications Center To Disrupt Their Reinforcements. \n\n Final Objective: Escort Our Demo Truck Into the Allied Base And Detonate The Nukes. The Allies Have Set Up Heavy Defenses In The Area, Keep Your Eyes Peeled. Good Luck Comrade.\n\n END TRANSMISSION:
+LuaScript:
+Scripts: RedZone.lua, AIRedZone.lua
+MusicPlaylist:
+BackgroundMusic: spinner
+ObjectivesPanel:
+PanelName: MISSION_OBJECTIVES
+MapOptions:
+ShortGameEnabled: True
+ShortGameLocked: True
+CAMERA.EnglandPowerBase:
+Inherits: CAMERA
+RevealsShroud:
+Range: 20c0
+CAMERA.DesertPatrolCam:
+Inherits: CAMERA
+RevealsShroud:
+Range: 15c0
+CAMERA.PrisonBaseCam:
+Inherits: CAMERA
+RevealsShroud:
+Range: 24c0
+CAMERA.CommsCenterCam:
+Inherits: CAMERA
+RevealsShroud:
+Range: 27c0
+CAMERA.EnglandMainCam:
+Inherits: CAMERA
+RevealsShroud:
+Range: 13c0
+CAMERA.EnglandMainLargeCam:
+Inherits: CAMERA
+RevealsShroud:
+Range: 24c0
+CAMERA.EnglandMainCam2:
+Inherits: CAMERA
+RevealsShroud:
+Range: 17c0
+CAMERA.EnglandPowerBaseEntryCam:
+Inherits: CAMERA
+RevealsShroud:
+Range: 19c0
+CAMERA.EnglandMain2ndBasecam:
+Inherits: CAMERA
+RevealsShroud:
+Range: 18c0
+^Wall:
+-Crushable:
+HIJACKER:
+Passenger:
+CargoType: copilot
+Captures:
+CaptureTypes: vehicle, helicopter, SupplyTruk
+Infiltrates:
+Types: TheifInfiltrate
+MustBeDestroyed:
+RequiredForShortGame: true
+2TNK:
+AutoTarget:
+AllowMovement: False
+Cargo:
+Types: Infantry
+MaxWeight: 1
+PipCount: 1
+InitialUnits: hijacker
+Armament@AG:
+Weapon: 90mmAA
+Recoil: 128
+RecoilRecovery: 38
+LocalOffset: 720,0,80
+MuzzleSequence: muzzle
+MustBeDestroyed:
+RequiredForShortGame: true
+GNRL:
+Inherits@1: ^CivInfantry
+Inherits@2: ^ArmedCivilian
+Tooltip:
+Name: Volkov
+RevealsShroud:
+Range: 6c0
+Demolition:
+DetonationDelay: 45
+Voice: Attack
+Valued:
+Cost: 150000
+Selectable:
+Class: GNRL
+Health:
+HP: 300
+Mobile:
+Speed: 74
+Voice: Move
+AttackFrontal:
+Voice: Attack
+AttackMove:
+Voice: Move
+Armament:
+Weapon: GrenadeLauncher
+LocalOffset: 0,0,350
+TakeCover:
+DamageModifiers:
+Prone50Percent: 50
+DamageTriggers: TriggerProne
+AutoTarget:
+Passenger:
+CargoType: copilot
+PipType: Red
+Voice: Move
+Guard:
+Voice: Move
+Voiced:
+VoiceSet: StavrosVoice
+-ScaredyCat:
+WithInfantryBody:
+IdleSequences: idle1
+MustBeDestroyed:
+RequiredForShortGame: true
+HIND:
+Inherits: ^Helicopter
+Buildable:
+Queue: Aircraft
+BuildAtProductionType: Helicopter
+BuildPaletteOrder: 20
+Prerequisites: ~hpad, ~techlevel.medium
+Valued:
+Cost: 6000
+Tooltip:
+Name: Hind
+Description: Helicopter gunship armed\nwith dual chainguns.\n Strong vs Infantry, Light armor.\n Weak vs Tanks, Aircraft
+Health:
+HP: 300
+Armor:
+Type: heavy
+RevealsShroud:
+Range: 10c0
+Type: CenterPosition
+ProvidesRadar:
+Armament@CHAINGUN:
+Weapon: ChainGun
+LocalOffset: 900, 0, -200
+MuzzleSequence: muzzle
+Armament@PRIMARY:
+Name: primary
+Weapon: HellfireAG
+LocalOffset: 85,-300,-85
+MuzzleSequence: muzzle
+Armament@SECONDARY:
+Name: secondary
+Weapon: HellfireAG
+LocalOffset: 85,300,-85
+MuzzleSequence: muzzle
+Aircraft:
+RearmBuildings: fix
+LandWhenIdle: False
+InitialFacing: 20
+LandableTerrainTypes: Clear,Rough,Road,Ore,Beach
+ROT: 4
+Speed: 112
+AirborneUpgrades: airborne
+CanHover: True
+EjectOnDeath:
+PilotActor: E1
+SuccessRate: 0
+AutoTarget:
+InitialStance: HoldFire
+InitialStanceAI: HoldFire
+WithSpriteRotorOverlay:
+AmmoPool:
+Ammo: 60
+PipCount: 9
+ReloadTicks: 10
+PipType: Red
+ReloadCount: 3
+SelfReloads: True
+SelfReloadDelay: 10
+AttackHeli:
+FacingTolerance: 20
+RenderSprites:
+Scale: 1.3
+Capturable:
+Type: helicopter
+CaptureThreshold: 1
+CaptureNotification:
+Notification: UnitStolen
+Cargo:
+Types: copilot
+MaxWeight: 2
+PipCount: 2
+InitialUnits: hijacker
+Targetable@GROUND:
+TargetTypes: Ground, Vehicle
+MustBeDestroyed:
+RequiredForShortGame: true
+^Helicopter:
+Inherits: ^Plane
+Tooltip:
+GenericName: Helicopter
+GpsDot:
+String: Helicopter
+Hovers:
+OffsetModifier: 0
+Targetable:
+TargetTypes: Repair
+MSLO:
+-Targetable:
+-Selectable:
+Explodes:
+Weapon: BarrelExplodeBase
+NukePower:
+ChargeTime: 600
+AllowMultiple: True
+Power:
+Amount: +0
+MustBeDestroyed:
+RequiredForShortGame: true
+CA:
+RevealsShroud:
+Range: 11c0
+MISS:
+Tooltip:
+Name: Prison
+Targetable:
+TargetTypes: Structure, helicopter, Ground
+Inherits: ^TechBuilding
+Selectable:
+Priority: 0
+Building:
+Footprint: xxx xxx
+Dimensions: 3,2
+Health:
+HP: 1300
+Armor:
+Type: Wood
+Bib:
+WithDeathAnimation:
+DeathSequence: dead
+UseDeathTypeSuffix: false
+WithBuildingExplosion:
+Delay: 1
+ProvidesPrerequisite@buildingname:
+Power:
+Amount: +600
+MustBeDestroyed:
+RequiredForShortGame: false
+FIX:
+Tooltip:
+Name: Ammo Depot
+Targetable:
+TargetTypes:
+RenderSprites:
+Image: ammobox2
+SelectionDecorations:
+VisualBounds: 2,2,0,0
+CustomSelectionSize:
+CustomBounds: 2,2
+-CaptureNotification:
+Building:
+Footprint: _x_ xxx _x_
+Dimensions: 3,3
+RepairsUnits:
+ValuePercentage: 20
+HpPerStep: 10
+StartRepairingNotification: UnitFirepowerUpgraded
+Interval: 10
+FinishRepairingNotification: UnitArmorUpgraded
+Reservable:
+ProximityCapturable:
+Permanent: False
+MustBeClear: False
+Range: 3c0
+CaptorTypes: Helicopter, Plane
+MustBeDestroyed:
+RequiredForShortGame: false
+Power:
+Amount: +0
+APC.EntryUnit:
+Inherits: APC
+-Selectable:
+RejectsOrders:
+AutoSelectionSize:
+WithFacingSpriteBody:
+RenderSprites:
+Image: apc
+Cargo:
+Types: Infantry
+MaxWeight: 1
+PipCount: 1
+JEEP:
+Inherits: ^Vehicle
+Buildable:
+Queue: Vehicle
+BuildPaletteOrder: 30
+Prerequisites: ~vehicles.allies, ~techlevel.low
+Valued:
+Cost: 500
+Tooltip:
+Name: Ranger
+Description: Fast scout & anti-infantry vehicle.\n Strong vs Infantry\n Weak vs Vehicles, Aircraft
+Health:
+HP: 150
+Armor:
+Type: Light
+Mobile:
+ROT: 10
+Speed: 170
+RevealsShroud:
+Range: 8c0
+Turreted:
+ROT: 10
+Offset: 0,0,85
+Armament:
+Weapon: M60mg
+MuzzleSequence: muzzle
+AttackTurreted:
+WithMuzzleOverlay:
+AutoTarget:
+Cargo:
+Types: Infantry
+MaxWeight: 1
+PipCount: 1
+InitialUnits: hijacker
+MustBeDestroyed:
+RequiredForShortGame: false
+LST.IN:
+RejectsOrders:
+Inherits: LST
+RenderSprites:
+Image: LST
+Cargo:
+Types: disabled
+DOME:
+RenderSprites:
+Scale: 1.1
+Health:
+HP: 3000
+Tooltip:
+Name: Communications Center
+Power:
+Amount: +600
+MustBeDestroyed:
+RequiredForShortGame: false
+DTRK:
+Selectable:
+Targetable:
+RejectsOrders:
+Tooltip:
+Name: Demolition Truck
+Health:
+HP: 3000
+Armor:
+Type: heavy
+Mobile:
+Speed: 100
+MustBeDestroyed:
+RequiredForShortGame: false
+TRUK:
+SpawnActorOnDeath:
+Actor: healcrate
+Cargo:
+Types: Infantry
+MaxWeight: 1
+PipCount: 1
+InitialUnits: hijacker
+-Capturable:
+Type: SupplyTruk
+CaptureThreshold: 1
+CaptureNotification:
+Notification: UnitStolen
+MustBeDestroyed:
+RequiredForShortGame: false
+ARTY:
+Cargo:
+Types: Infantry
+MaxWeight: 1
+PipCount: 1
+InitialUnits: hijacker
+MustBeDestroyed:
+RequiredForShortGame: false
+OILB:
+-Targetable:
+-Selectable:
+Explodes:
+Weapon: BarrelExplodeBase
+1TNK:
+Cargo:
+Types: Infantry
+MaxWeight: 1
+PipCount: 1
+InitialUnits: hijacker
+MustBeDestroyed:
+RequiredForShortGame: false
+SYRD:
+MustBeDestroyed:
+RequiredForShortGame: false
+AGUN:
+MustBeDestroyed:
+RequiredForShortGame: false
+PBOX:
+MustBeDestroyed:
+RequiredForShortGame: false
+GUN:
+MustBeDestroyed:
+RequiredForShortGame: false
+ATEK:
+MustBeDestroyed:
+RequiredForShortGame: false
+WEAP:
+MustBeDestroyed:
+RequiredForShortGame: false
+FACT:
+MustBeDestroyed:
+RequiredForShortGame: false
+PROC:
+MustBeDestroyed:
+RequiredForShortGame: false
+SILO:
+MustBeDestroyed:
+RequiredForShortGame: false
+HPAD:
+MustBeDestroyed:
+RequiredForShortGame: false
+POWR:
+MustBeDestroyed:
+RequiredForShortGame: false
+APWR:
+MustBeDestroyed:
+RequiredForShortGame: false
+TENT:
+MustBeDestroyed:
+RequiredForShortGame: false
+SBAG:
+MustBeDestroyed:
+RequiredForShortGame: false
+FENC:
+MustBeDestroyed:
+RequiredForShortGame: false
+BRIK:
+MustBeDestroyed:
+RequiredForShortGame: false
+CYCL:
+MustBeDestroyed:
+RequiredForShortGame: false
+BARB:
+MustBeDestroyed:
+RequiredForShortGame: false
+TRAN:
+-Selectable:
+-Targetable:
+Sequences:
+ammobox2:
+make: pboxmake
+Length: *
+icon: ammobox2
+active:
+Start: 0
+Length: 0
+Offset: 0,1
+ZOffset: -1c511
+bib: mbFIX
+Length: *
+ZOffset: -1c511
+Offset: 0,-4
+UseTilesetExtension: true
+gnrl:
+icon: e7icon
+shoot:
+Start: 56
+Length: 4
+Facings: 8
+Tick: 80
+die2:
+Start: 218
+Length: 8
+Tick: 150
+die3:
+Start: 226
+Length: 8
+Tick: 150
+die4:
+Start: 234
+Length: 12
+Tick: 150
+die5:
+Start: 246
+Length: 18
+Tick: 150
+VoxelSequences:
+Weapons:
+90mmAA:
+ReloadDelay: 50
+Range: 8c768
+Report: cannon1.aud
+InvalidTargets: Ground, Water
+ValidTargets: Air
+Projectile: Bullet
+Speed: 682
+Image: 120MM
+Warhead@1Dam: SpreadDamage
+Spread: 128
+Damage: 12
+InvalidTargets: Ground, Water
+ValidTargets: Air
+Versus:
+None: 12
+Wood: 12
+Light: 12
+Concrete: 12
+DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
+Warhead@2Smu: LeaveSmudge
+SmudgeType: Crater
+Warhead@3EffGround: CreateEffect
+Explosions: small_explosion
+ImpactSounds: kaboom12.aud
+InvalidImpactTypes: Water
+Warhead@4EffWater: CreateEffect
+Explosions: small_splash
+ImpactSounds: splash9.aud
+ValidImpactTypes: Water
+Warhead@5EffAir: CreateEffect
+Explosions: med_explosion_air
+ImpactSounds: kaboom25.aud
+ValidImpactTypes: Air, AirHit
+BarrelExplodeBase:
+ValidTargets: Ground, Water, Underwater, Air
+Warhead@1Dam_impact: SpreadDamage
+Spread: 1c0
+Damage: 150
+Falloff: 1000, 368, 135, 50, 18, 7, 0
+ValidTargets: Ground, Water, Underwater, Air
+Versus:
+Concrete: 25
+DamageTypes: Prone50Percent, TriggerProne, FireDeath
+Warhead@2Res_impact: DestroyResource
+Size: 1
+Warhead@3Smu_impact: LeaveSmudge
+SmudgeType: Scorch
+Size: 1
+Warhead@4Eff_impact: CreateEffect
+Explosions: nuke
+ImpactSounds: kaboom1.aud
+Warhead@5Dam_areanuke1: SpreadDamage
+Spread: 2c0
+Damage: 60
+Falloff: 1000, 368, 135, 50, 18, 7, 0
+Delay: 5
+ValidTargets: Ground, Water, Underwater, Air
+Versus:
+Concrete: 25
+DamageTypes: Prone50Percent, TriggerProne, FireDeath
+Warhead@6Res_areanuke1: DestroyResource
+Size: 2
+Delay: 5
+Warhead@7Smu_areanuke1: LeaveSmudge
+SmudgeType: Scorch
+Size: 2
+Delay: 5
+Warhead@8Eff_areanuke1: CreateEffect
+ImpactSounds: kaboom22.aud
+Delay: 5
+Warhead@9Dam_areanuke2: SpreadDamage
+Spread: 3c0
+Damage: 60
+Falloff: 1000, 368, 135, 50, 18, 7, 0
+Delay: 10
+ValidTargets: Ground, Water, Underwater, Air
+Versus:
+Concrete: 25
+DamageTypes: Prone50Percent, TriggerProne, FireDeath
+Warhead@10Res_areanuke2: DestroyResource
+Size: 3
+Delay: 10
+Warhead@11Smu_areanuke2: LeaveSmudge
+SmudgeType: Scorch
+Size: 3
+Delay: 10
+Warhead@12Dam_areanuke3: SpreadDamage
+Spread: 4c0
+Damage: 60
+Falloff: 1000, 368, 135, 50, 18, 7, 0
+Delay: 15
+ValidTargets: Ground, Water, Underwater, Air
+Versus:
+Concrete: 25
+DamageTypes: Prone50Percent, TriggerProne, FireDeath
+Warhead@13Res_areanuke3: DestroyResource
+Size: 4
+Delay: 15
+Warhead@14Smu_areanuke3: LeaveSmudge
+SmudgeType: Scorch
+Size: 4
+Delay: 15
+Warhead@15Dam_areanuke4: SpreadDamage
+Spread: 5c0
+Damage: 60
+Falloff: 1000, 368, 135, 50, 18, 7, 0
+Delay: 20
+ValidTargets: Ground, Water, Underwater, Air
+Versus:
+Concrete: 25
+DamageTypes: Prone50Percent, TriggerProne, FireDeath
+Warhead@16Res_areanuke4: DestroyResource
+Size: 5
+Delay: 20
+Warhead@17Smu_areanuke4: LeaveSmudge
+SmudgeType: Scorch
+Size: 5
+Delay: 20
+M60mg:
+ReloadDelay: 40
+Range: 6c0
+Report: pillbox1.aud
+Burst: 5
+ValidTargets: Air, Ground
+Projectile: Bullet
+Speed: 1c682
+Warhead@1Dam: SpreadDamage
+Spread: 128
+Damage: 5
+ValidTargets: Air, Ground
+Versus:
+Wood: 10
+Light: 10
+Heavy: 10
+Concrete: 10
+DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+Warhead@2Eff: CreateEffect
+Explosions: piffs
+InvalidImpactTypes: Water
+Warhead@3EffWater: CreateEffect
+Explosions: water_piffs
+ValidImpactTypes: Water
+Warhead@5EffAir: CreateEffect
+Explosions: small_explosion_air
+ImpactSounds: kaboom25.aud
+ValidImpactTypes: Air, AirHit
+M1Carbine:
+ValidTargets: Ground, Water
+Warhead@1Dam: SpreadDamage
+Spread: 128
+Damage: 15
+Versus:
+Wood: 25
+Light: 30
+Heavy: 10
+Concrete: 10
+DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+Warhead@2Eff: CreateEffect
+Explosions: piffs
+InvalidImpactTypes: Water
+Warhead@3EffWater: CreateEffect
+Explosions: water_piffs
+ValidImpactTypes: Water
+HellfireAG:
+ReloadDelay: 100
+Range: 7c0
+MinRange: 5c256
+Report: missile6.aud
+Burst: 5
+BurstDelay: 3
+ValidTargets: Ground, Water
+InvalidTargets: Infantry
+Projectile: Bullet
+Speed: 300
+Blockable: false
+Angle: 15
+Inaccuracy: 1c0
+Image: MISSILE
+TrailImage: smokey
+ContrailLength: 35
+Warhead@1Dam: SpreadDamage
+Spread: 128
+Damage: 60
+ValidTargets: Ground, Water
+Versus:
+None: 30
+Wood: 75
+Light: 75
+Concrete: 50
+DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
+Warhead@2Smu: LeaveSmudge
+SmudgeType: Crater
+Warhead@3Eff: CreateEffect
+Explosions: med_explosion
+ImpactSounds: kaboom25.aud
+InvalidImpactTypes: Water
+Warhead@4EffWater: CreateEffect
+Explosions: med_splash
+ImpactSounds: splash9.aud
+ValidImpactTypes: Water
+GrenadeLauncher:
+ReloadDelay: 13
+Range: 7c0
+Report: silppk.aud
+ValidTargets: Ground, Infantry, Vehicle, Tank, Water, Ship
+InvalidTargets: Structure, Wall, Husk
+Projectile: Bullet
+Speed: 2c0
+Inaccuracy: 1c300
+Warhead@1Dam: SpreadDamage
+Spread: 320
+Falloff: 1000, 368, 135, 50, 18, 7, 0
+Damage: 20
+ValidTargets: Ground, Infantry, Vehicle, Tank, Water, Ship
+DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+Warhead@2Smu: LeaveSmudge
+SmudgeType: Scorch
+Size: 1
+Warhead@2Eff: CreateEffect
+Explosions: artillery_explosion
+ImpactSounds: kaboom15.aud
+InvalidImpactTypes: Water
+Warhead@3EffWater: CreateEffect
+Explosions: large_splash
+ImpactSounds: splash9.aud
+ValidImpactTypes: Water
+RedEye:
+ReloadDelay: 50
+Range: 7c512
+Report: missile1.aud
+ValidTargets: Air
+Projectile: Missile
+Arm: 3
+Blockable: false
+ContrailLength: 10
+Image: MISSILE
+HorizontalRateOfTurn: 20
+RangeLimit: 9c0
+MaximumLaunchSpeed: 298
+Warhead@1Dam: SpreadDamage
+Spread: 128
+Damage: 20
+ValidTargets: Air
+Versus:
+None: 20
+Wood: 20
+Light: 20
+Heavy: 20
+DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
+Warhead@2Smu: LeaveSmudge
+SmudgeType: Crater
+Warhead@3Eff: CreateEffect
+Explosions: med_explosion_air
+ImpactSound: kaboom25.aud
+ChainGun:
+ReloadDelay: 2
+Range: 7c0
+MinRange: 1c768
+Report: gun13.aud
+Projectile: Bullet
+Speed: 1c682
+Blockable: false
+Warhead@1Dam: SpreadDamage
+Spread: 128
+Damage: 30
+Versus:
+None: 120
+Wood: 50
+Light: 60
+Heavy: 25
+Concrete: 25
+DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+Warhead@2Eff: CreateEffect
+Explosions: piffs
+InvalidImpactTypes: Water
+Warhead@3EffWater: CreateEffect
+Explosions: water_piffs
+ValidImpactTypes: Water
+Stinger:
+Warhead@1Dam: SpreadDamage
+Damage: 30
+StingerAA:
+Warhead@1Dam: SpreadDamage
+Damage: 10
+Voices:
+Music:
+Spinner: spinner
+Hidden: True
+intro: Intro
+Hidden: False
+Notifications:
